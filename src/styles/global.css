@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 @import '@/styles/theme.css';
 
+@font-face {
+    font-family: 'roboto';
+    font-display: swap;
+    src: url('../assets/fonts/Roboto.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'jetbrains';
+    font-display: swap;
+    src: url('../assets/fonts/JetBrainsMono.ttf') format('truetype');
+}
+
 @layer base {
     .light {}
     .dark {}
