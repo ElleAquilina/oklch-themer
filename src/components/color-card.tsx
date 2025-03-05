@@ -82,15 +82,30 @@ export default function ColorCard() {
         <>
             <div>
                 <p>Color Display</p>
-                <canvas
-                    className='w-96 h-48'
-                    style={{
-                        backgroundColor: formatCss(oklch),
-                    }}
-                />
+                <div className='flex flex-row'>
+                    <canvas
+                        className='w-48 h-48 ml-2'
+                        style={{
+                            backgroundColor: formatCss(oklch),
+                        }}
+                    />
+                    <canvas
+                        className='w-48 h-48 ml-2'
+                        style={{
+                            backgroundColor: formatCss(clampChroma(oklch)),
+                        }}
+                    />
+                    <canvas
+                        className='w-48 h-48 ml-2'
+                        style={{
+                            backgroundColor: formatRgb(clampChroma(oklch)),
+                        }}
+                    />
+                </div>
+
                 <p>in range?: {inRgb(oklch) ? 'yes' : 'no'}</p>
                 <p>
-                    oklch: ({oklch.l} {oklch.c} {oklch.h})
+                    oklch (input values): ({oklch.l} {oklch.c} {oklch.h})
                 </p>
                 <p>oklch: {formatCss(clampChroma(oklch, 'oklch'))}</p>
                 <p>rgb: {formatRgb(clampChroma(oklch))}</p>
