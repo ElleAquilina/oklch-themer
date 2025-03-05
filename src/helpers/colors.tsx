@@ -16,17 +16,7 @@ export let roundChannel = round(2)
 export let rgb = useMode(modeRgb)
 
 export function getRandomOklchColor(): Oklch {
-    // Use clampChroma to get a valid RGB colour
-    let randomColor = clampChroma(
-        random('oklch', { l: [0.25, 1], h: [0, 360] }),
-    )
-
-    return {
-        mode: 'oklch',
-        l: roundChannel(randomColor.l),
-        c: roundChannel(randomColor.c),
-        h: roundChannel(randomColor.h),
-    }
+    return roundOklch(clampChroma(random('oklch', { l: [0.4, 1] })))
 }
 
 export function inRgb(color: Color): boolean {
@@ -39,4 +29,15 @@ export function inRgb(color: Color): boolean {
         check.b >= -COLOR_SPACE_GAP &&
         check.b <= 1 + COLOR_SPACE_GAP
     )
+}
+
+export function roundOklch(oklch: Oklch): Oklch {
+    return {
+        ...oklch,
+        l: roundChannel(oklch.l),
+        c: roundChannel(oklch.c),
+        h: oklch.h !== undefined ? roundChannel(oklch.h) : undefined,
+        alpha:
+            oklch.alpha !== undefined ? roundChannel(oklch.alpha) : undefined,
+    }
 }
