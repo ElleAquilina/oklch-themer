@@ -8,7 +8,7 @@ export default function ColorCard() {
     const [oklch, setOklch] = useState<Oklch>(getRandomOklchColor())
 
     const [inputData, setInputData] = useState({
-        l: oklch.l,
+        l: oklch.l * 100, // Display as percentage value
         c: oklch.c,
         h: oklch.h,
     })
@@ -22,9 +22,14 @@ export default function ColorCard() {
     function setOklchProperty(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target
 
+        setInputData((prevState) => ({
+            ...prevState,
+            [name]: name === 'l' ? parseFloat(value) * 100 : value,
+        }))
+
         setOklch((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: parseFloat(value),
         }))
     }
 
@@ -55,7 +60,7 @@ export default function ColorCard() {
                 setInputData(valid)
                 setOklch((prevState) => ({
                     ...prevState,
-                    l: valid.l,
+                    l: valid.l / 100, // Change percentage to Oklch object's decimal format
                     c: valid.c,
                     h: valid.h,
                 }))
@@ -92,7 +97,7 @@ export default function ColorCard() {
                 <p>hex: {formatHex(clampChroma(oklch))}</p>
                 <div className='flex flex-row'>
                     <div>
-                        <p>0-1</p>
+                        <p>0-100</p>
                         <input
                             type='range'
                             name='l'
