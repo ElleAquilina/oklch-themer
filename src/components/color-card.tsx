@@ -1,17 +1,11 @@
-import { colorFormatHex, colorFormatRgb, inRGB } from '@/helpers/colors'
+import { getRandomOklchColor, inRgb } from '@/helpers/colors'
 import { Schema } from '@/types/oklch.schema.tsx'
 import 'culori/css'
-import { clampChroma, formatCss, formatRgb, Oklch, random } from 'culori/fn'
+import { clampChroma, formatCss, formatHex, formatRgb, Oklch } from 'culori/fn'
 import { useState } from 'react'
 
 export default function ColorCard() {
-    const [oklch, setOklch] = useState<Oklch>(
-        clampChroma(
-            random('oklch', {
-                l: [0.25, 1],
-            }),
-        ),
-    )
+    const [oklch, setOklch] = useState<Oklch>(getRandomOklchColor())
 
     const [inputData, setInputData] = useState({
         l: oklch.l,
@@ -53,16 +47,6 @@ export default function ColorCard() {
         validate(name)
     }
 
-    function round() {
-        // Drop Chroma and Hue is Lightness is low
-        if (oklch.l > 0.15) {
-            oklch.c = 0
-            oklch.h = 0
-        }
-
-        // If hue is over 360, it should wrap around
-    }
-
     function validate(channelName: string) {
         try {
             let valid = Schema.parse(inputData)
@@ -99,14 +83,13 @@ export default function ColorCard() {
                         backgroundColor: formatCss(oklch),
                     }}
                 />
-                <p>in range?: {inRGB(oklch) ? 'yes' : 'no'}</p>
+                <p>in range?: {inRgb(oklch) ? 'yes' : 'no'}</p>
                 <p>
                     oklch: ({oklch.l} {oklch.c} {oklch.h})
                 </p>
-                <p>rgb: {colorFormatRgb(oklch)}</p>
-                <p>hex: {colorFormatHex(oklch)}</p>
-                <p>CLAMPED oklch: {formatCss(clampChroma(oklch, 'oklch'))}</p>
-                <p>CLAMPED rgb: {formatRgb(clampChroma(oklch))}</p>
+                <p>oklch: {formatCss(clampChroma(oklch, 'oklch'))}</p>
+                <p>rgb: {formatRgb(clampChroma(oklch))}</p>
+                <p>hex: {formatHex(clampChroma(oklch))}</p>
                 <div className='flex flex-row'>
                     <div>
                         <p>0-1</p>

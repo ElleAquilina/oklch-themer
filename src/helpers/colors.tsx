@@ -1,38 +1,35 @@
 import 'culori/css'
 import {
+    clampChroma,
     Color,
-    formatHex,
-    formatRgb,
-    Lch,
     modeRgb,
     Oklch,
+    random,
     round,
-    toGamut,
     useMode,
 } from 'culori/fn'
 
-export function colorFormatRgb(color: Oklch) {
-    //let color: AnyLch = valueToColor(value)
-    let rgbColor: Color = inRGB(color) ? color : toRgb(color)
-    return formatRgb(rgbColor)
-}
-
-export function colorFormatHex(color: Oklch) {
-    let rgbColor: Color = inRGB(color) ? color : toRgb(color)
-    return formatHex(rgbColor)
-}
-
-export type AnyLch = Lch | Oklch
+const COLOR_SPACE_GAP = 0.0001
 
 export let roundChannel = round(2)
 
 export let rgb = useMode(modeRgb)
 
-const COLOR_SPACE_GAP = 0.0001
+export function getRandomOklchColor(): Oklch {
+    // Use clampChroma to get a valid RGB colour
+    let randomColor = clampChroma(
+        random('oklch', { l: [0.25, 1], h: [0, 360] }),
+    )
 
-let toRgb = toGamut('rgb', 'oklch')
+    return {
+        mode: 'oklch',
+        l: roundChannel(randomColor.l),
+        c: roundChannel(randomColor.c),
+        h: roundChannel(randomColor.h),
+    }
+}
 
-export function inRGB(color: Color): boolean {
+export function inRgb(color: Color): boolean {
     let check = rgb(color)
     return (
         check.r >= -COLOR_SPACE_GAP &&
