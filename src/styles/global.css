@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @import '@/styles/theme.css';
 
+@plugin 'daisyui' {
+    themes: light --default, dark --prefersdark, dim, black;
+}
+
 @font-face {
     font-family: 'roboto';
     font-display: swap;
@@ -14,6 +18,4 @@
 }
 
 @layer base {
-    .light {}
-    .dark {}
 }

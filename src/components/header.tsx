@@ -1,5 +1,5 @@
 import Github from '@/assets/icons/github'
-import ThemeToggle from '@/components/theme-toggle'
+import ThemeController from '@/components/theme-controller.tsx'
 
 export default function Header() {
     return (
@@ -13,7 +13,7 @@ export default function Header() {
                 </div>
                 <div className='flex flex-row'>
                     <Github className='w-10 h-10 hidden md:block' />
-                    <ThemeToggle />
+                    <ThemeController />
                 </div>
             </header>
         </>

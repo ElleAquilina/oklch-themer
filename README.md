@@ -17,10 +17,11 @@ Web app to convert HEX to OKLCH colors and TailwindCSS templates.
 - [x] (Color Card) Add percentage value for luminosity instead of decimal
 - [x] (Color Card) Add alpha channel
 - [ ] (Color Card) Add checkered background to canvas
+- [ ] (Color Card) Add linear gradients representing each range input
 - [ ] (Color Card) Add hotkeys to input fields (luminosity (l), chroma (c), hue (h), alpha (a))
 - [ ] (Color Card) Add '+' / '-' to sides of input fields when selected
-- [ ] (Styling) Install component library (new Daisy?) & style components
-- [ ] (Styling) Switch toggle to grey scale themes
+- [x] (Styling) Install component library (new Daisy?) & style components
+- [x] (Styling) Switch toggle to grey scale themes
 - [ ] (List Card) Add list of color capabilities (expand...)
 - [ ] (Code Card) Add code capabilities based on list of colors (expand...)
 
