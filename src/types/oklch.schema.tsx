@@ -32,11 +32,23 @@ export const HueSchema = z.coerce
     .optional()
     .transform((value) => {
         // After validating truncate to two digits, and wrap around if over 360 by applying modulo
-        return Math.floor((value % 360) * 100) / 100
+        return value ? Math.floor((value % 360) * 100) / 100 : value
     })
 
-export const Schema = z.object({
+export const AlphaSchema = z.coerce
+    .number({
+        invalid_type_error: 'Alpha must be a number',
+    })
+    .gte(0)
+    .lte(1)
+    .optional()
+    .transform((value) => {
+        return value ? Math.floor(value * 100) / 100 : value
+    })
+
+export const Schema = {
     l: LuminositySchema,
     c: ChromaSchema,
     h: HueSchema,
-})
+    alpha: AlphaSchema,
+}

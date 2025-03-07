@@ -11,15 +11,17 @@ export default function ColorCard() {
         l: oklch.l * 100, // Display as percentage value
         c: oklch.c,
         h: oklch.h,
+        alpha: oklch.alpha,
     })
 
     const [errors, setErrors] = useState({
         l: '',
         c: '',
         h: '',
+        alpha: '',
     })
 
-    function setOklchProperty(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleRangeChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target
 
         setInputData((prevState) => ({
@@ -33,7 +35,7 @@ export default function ColorCard() {
         }))
     }
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target
 
         setInputData((prevState) => ({
@@ -54,15 +56,18 @@ export default function ColorCard() {
 
     function validate(channelName: string) {
         try {
-            let valid = Schema.parse(inputData)
+            let schema = Schema[channelName as keyof typeof Schema]
+            let data = inputData[channelName as keyof typeof inputData]
+            let validatedData = schema.parse(data)
 
-            if (valid) {
-                setInputData(valid)
+            if (validatedData) {
+                setInputData((prevState) => ({
+                    ...prevState,
+                    [channelName]: validatedData,
+                }))
                 setOklch((prevState) => ({
                     ...prevState,
-                    l: valid.l / 100, // Change percentage to Oklch object's decimal format
-                    c: valid.c,
-                    h: valid.h,
+                    [channelName]: validatedData,
                 }))
                 setErrors((prevState) => ({
                     ...prevState,
@@ -117,7 +122,7 @@ export default function ColorCard() {
                             type='range'
                             name='l'
                             value={oklch.l}
-                            onChange={setOklchProperty}
+                            onChange={handleRangeChange}
                             min='0'
                             max='1'
                             step='0.001'
@@ -126,7 +131,7 @@ export default function ColorCard() {
                             type='text'
                             name='l'
                             value={inputData.l}
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             onBlur={handleOnBlur}
                             onKeyDown={(e) =>
                                 e.key === 'Enter' ? handleSubmit(e) : null
@@ -139,7 +144,7 @@ export default function ColorCard() {
                             type='range'
                             name='c'
                             value={oklch.c}
-                            onChange={setOklchProperty}
+                            onChange={handleRangeChange}
                             min='0'
                             max='0.4'
                             step='0.001'
@@ -148,7 +153,7 @@ export default function ColorCard() {
                             type='text'
                             name='c'
                             value={inputData.c}
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             onBlur={handleOnBlur}
                             onKeyDown={(e) =>
                                 e.key === 'Enter' ? handleSubmit(e) : null
@@ -161,7 +166,7 @@ export default function ColorCard() {
                             type='range'
                             name='h'
                             value={oklch.h}
-                            onChange={setOklchProperty}
+                            onChange={handleRangeChange}
                             min='0'
                             max='360'
                             step='1'
@@ -170,7 +175,7 @@ export default function ColorCard() {
                             type='text'
                             name='h'
                             value={inputData.h}
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             onBlur={handleOnBlur}
                             onKeyDown={(e) =>
                                 e.key === 'Enter' ? handleSubmit(e) : null
@@ -179,6 +184,30 @@ export default function ColorCard() {
                             style={{
                                 borderColor: errors.h ? 'red' : 'transparent',
                             }}
+                        />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <p>0-1</p>
+                        <input
+                            type='range'
+                            name='alpha'
+                            value={oklch.alpha}
+                            onChange={handleRangeChange}
+                            min='0'
+                            max='1'
+                            step='0.01'
+                        />
+                        <input
+                            type='text'
+                            name='alpha'
+                            value={inputData.alpha}
+                            onChange={handleInputChange}
+                            onBlur={handleOnBlur}
+                            onKeyDown={(e) =>
+                                e.key === 'Enter' ? handleSubmit(e) : null
+                            }
                         />
                     </div>
                 </div>

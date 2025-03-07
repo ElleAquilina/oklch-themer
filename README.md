@@ -12,7 +12,19 @@ Web app to convert HEX to OKLCH colors and TailwindCSS templates.
 - PrismJS : Code highlighter
 
 ## TODO
-- Round the random color value when page is loaded
-- Add percentage value for luminosity instead of decimal
-- Add hotkeys to input fields (luminosity (l), chroma (c), hue (h), alpha (a))
-- Add more colour formats
+
+- [x] (Color Card) Round the random color value when page is loaded
+- [x] (Color Card) Add percentage value for luminosity instead of decimal
+- [x] (Color Card) Add alpha channel
+- [ ] (Color Card) Add checkered background to canvas
+- [ ] (Color Card) Add hotkeys to input fields (luminosity (l), chroma (c), hue (h), alpha (a))
+- [ ] (Color Card) Add '+' / '-' to sides of input fields when selected
+- [ ] (Styling) Install component library (new Daisy?) & style components
+- [ ] (Styling) Switch toggle to grey scale themes
+- [ ] (List Card) Add list of color capabilities (expand...)
+- [ ] (Code Card) Add code capabilities based on list of colors (expand...)
+
+# Stretch Goals
+- Add more colour formats to convert to
+- Add i18N & L10N
+- Add import/export functionality
