@@ -1,13 +1,11 @@
-import ColorCard from '@/components/color-card.tsx'
+import ColorCard from '@/components/color-card'
 import Header from '@/components/header'
 
 function App() {
     return (
         <>
             <Header />
-            <div>color-list</div>
             <div>
-                color-picker
                 <ColorCard />
             </div>
         </>
