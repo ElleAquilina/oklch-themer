@@ -1,7 +1,7 @@
 import { oklchAtom } from '@/stores/atoms.tsx'
 import { Schema } from '@/types/oklch.schema.tsx'
 import { useAtom } from 'jotai'
-import { ArrowBigDown, ArrowBigUp } from 'lucide-react'
+import { ChevronsDown, ChevronsUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
@@ -50,7 +50,7 @@ export default function ColorTextInput({ channel }: ColorInputProps) {
         <>
             <div className='join w-44'>
                 <button className='btn rounded-l-full p-2 w-10 h-10 join-item'>
-                    <ArrowBigDown />
+                    <ChevronsDown />
                 </button>
                 <input
                     type='text'
@@ -64,7 +64,7 @@ export default function ColorTextInput({ channel }: ColorInputProps) {
                     className={`join-item input text-center text-lg ${error ? 'input-error' : ''}`}
                 />
                 <button className='btn rounded-r-full w-10 h-10 p-2 join-item'>
-                    <ArrowBigUp />
+                    <ChevronsUp />
                 </button>
             </div>
         </>
