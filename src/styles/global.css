@@ -1,8 +1,7 @@
 @import 'tailwindcss';
-@import '@/styles/theme.css';
 
 @plugin 'daisyui' {
-    themes: light --default, dark --prefersdark, dim, black;
+    themes: light --default, dark --prefersdark, dim, black, dracula;
 }
 
 @font-face {
@@ -18,4 +17,22 @@
 }
 
 @layer base {
+    body {
+        font-family: 'Roboto', sans-serif; /* Default font */
+    }
+
+    h1 {
+        font-family: 'jetbrains';
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-family: 'jetbrains';
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-family: 'jetbrains';
+        font-size: 1.5rem;
+    }
 }

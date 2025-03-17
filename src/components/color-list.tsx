@@ -115,12 +115,21 @@ export default function ColorList() {
     }
 
     return (
-        <div className='relative content-center'>
-            <h1>Color List</h1>
+        <div className='flex h-full flex-col overflow-y-scroll'>
+            <div className='flex flex-row items-center justify-between'>
+                <h2 className='pl-4'>&gt;&nbsp;Color List</h2>
+                <button
+                    onClick={handleAddColor}
+                    className='btn btn-ghost btn-circle mt-1 mr-4'
+                    title='Add color'
+                >
+                    <CircleFadingPlus />
+                </button>
+            </div>
             <Reorder.Group
                 values={colors}
                 onReorder={setColors}
-                className='list'
+                className='list grow'
             >
                 <AnimatePresence>
                     {colors.map((color) => (
@@ -130,7 +139,7 @@ export default function ColorList() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className='list-row'
+                            className='list-row items-center pb-1'
                         >
                             <div
                                 className='badge'
@@ -165,25 +174,24 @@ export default function ColorList() {
                                     :   color.name}
                                 </p>
                             </div>
-                            <button
-                                onClick={() => handleDuplicateColor(color)}
-                                className='btn btn-square btn-ghost'
-                            >
-                                <Images />
-                            </button>
-                            <button
-                                onClick={() => handleRemoveColor(color)}
-                                className='btn btn-square btn-ghost'
-                            >
-                                <Trash2 />
-                            </button>
+                            <div>
+                                <button
+                                    onClick={() => handleDuplicateColor(color)}
+                                    className='btn btn-circle btn-ghost'
+                                >
+                                    <Images />
+                                </button>
+                                <button
+                                    onClick={() => handleRemoveColor(color)}
+                                    className='btn btn-circle btn-ghost'
+                                >
+                                    <Trash2 />
+                                </button>
+                            </div>
                         </Reorder.Item>
                     ))}
                 </AnimatePresence>
             </Reorder.Group>
-            <button onClick={handleAddColor} className='btn btn-ghost w-full'>
-                <CircleFadingPlus />
-            </button>
         </div>
     )
 }
