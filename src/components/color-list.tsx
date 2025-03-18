@@ -23,12 +23,12 @@ export default function ColorList() {
     }
 
     return (
-        <div className='flex h-full flex-col p-3'>
-            <div className='bg-base-300 sticky top-0 z-2 flex flex-row items-center justify-between px-3'>
+        <div className='flex h-full flex-col px-3'>
+            <div className='sticky top-0 flex flex-row items-center justify-between p-2'>
                 <h2 className='text-xl md:text-2xl'>&gt;&nbsp;Color List</h2>
                 <button
                     onClick={handleAddColor}
-                    className='btn btn-ghost btn-circle mt-1'
+                    className='btn btn-ghost btn-circle mt-1 -mr-2'
                     title='Add color'
                 >
                     <CircleFadingPlus />

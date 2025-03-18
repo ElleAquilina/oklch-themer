@@ -85,7 +85,7 @@ export default function ColorListRow({ color }: { color: Color }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelected(color)}
-            className={`list-row group mb-1 items-center p-2 ${selected?.name === color.name ? 'bg-base-100' : ''}`}
+            className={`list-row group mb-1 items-center p-1 sm:p-2 ${selected?.name === color.name ? 'bg-base-100' : ''}`}
         >
             <div
                 className='badge badge-outline'
