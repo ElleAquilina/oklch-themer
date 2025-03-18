@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @plugin 'daisyui' {
-    themes: light --default, dark --prefersdark, dim, black, dracula;
+    themes: lofi --default, business --prefersdark, retro, aqua, coffee;
 }
 
 @font-face {

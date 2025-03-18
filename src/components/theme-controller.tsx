@@ -6,6 +6,8 @@ function ThemeController() {
         //JSON.parse(localStorage.getItem('theme')),
     )
 
+    const themes = ['lofi', 'dark', 'retro', 'aqua', 'coffee']
+
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme')
         setTheme(storedTheme ? storedTheme : 'light')
@@ -39,56 +41,18 @@ function ThemeController() {
                 tabIndex={0}
                 className='dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl'
             >
-                <li>
-                    <input
-                        type='radio'
-                        name='theme-dropdown'
-                        className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
-                        aria-label='Light'
-                        value='light'
-                        onChange={handleThemeChange}
-                    />
-                </li>
-                <li>
-                    <input
-                        type='radio'
-                        name='theme-dropdown'
-                        className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
-                        aria-label='Dim'
-                        value='dim'
-                        onChange={handleThemeChange}
-                    />
-                </li>
-                <li>
-                    <input
-                        type='radio'
-                        name='theme-dropdown'
-                        className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
-                        aria-label='Dark'
-                        value='dark'
-                        onChange={handleThemeChange}
-                    />
-                </li>
-                <li>
-                    <input
-                        type='radio'
-                        name='theme-dropdown'
-                        className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
-                        aria-label='Black'
-                        value='black'
-                        onChange={handleThemeChange}
-                    />
-                </li>
-                <li>
-                    <input
-                        type='radio'
-                        name='theme-dropdown'
-                        className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
-                        aria-label='Dracula'
-                        value='dracula'
-                        onChange={handleThemeChange}
-                    />
-                </li>
+                {themes.map((theme) => (
+                    <li key={theme}>
+                        <input
+                            type='radio'
+                            name='theme-dropdown'
+                            className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
+                            aria-label={theme === 'lofi' ? 'light' : theme}
+                            value={theme}
+                            onChange={handleThemeChange}
+                        />
+                    </li>
+                ))}
             </ul>
         </div>
     )
