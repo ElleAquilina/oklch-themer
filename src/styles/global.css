@@ -21,18 +21,7 @@
         font-family: 'Roboto', sans-serif; /* Default font */
     }
 
-    h1 {
-        font-family: 'jetbrains';
-        font-size: 3rem;
-    }
-
-    h2 {
-        font-family: 'jetbrains';
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-family: 'jetbrains';
-        font-size: 1.5rem;
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'jetbrains', sans-serif;
     }
 }
