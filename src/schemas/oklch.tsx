@@ -46,7 +46,7 @@ export const AlphaSchema = z.coerce
         return value ? Math.floor(value * 100) / 100 : value
     })
 
-export const Schema = {
+export const OklchSchema = {
     l: LuminositySchema,
     c: ChromaSchema,
     h: HueSchema,
