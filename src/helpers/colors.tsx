@@ -2,7 +2,10 @@ import 'culori/css'
 import {
     clampChroma,
     Color,
+    colorsNamed,
+    differenceEuclidean,
     modeRgb,
+    nearest,
     Oklch,
     random,
     round,
@@ -40,4 +43,10 @@ export function roundOklch(oklch: Oklch): Oklch {
         alpha:
             oklch.alpha !== undefined ? roundChannel(oklch.alpha) : undefined,
     }
+}
+
+export function getNearestNamedColor(color: Color): string {
+    const colors = Object.keys(colorsNamed)
+    const nearestNamedColor = nearest(colors, differenceEuclidean())
+    return nearestNamedColor(color, 1)[0]
 }
