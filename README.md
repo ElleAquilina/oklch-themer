@@ -8,8 +8,9 @@ Web app to convert HEX to OKLCH colors and TailwindCSS templates.
 - Zod: Validation
 - Jotai: State management
 - TailwindCSS: Styling
+- DaisyUI: Styled components using tailwind classes
 - Culori : Color spaces, conversions, and manipulations
-- PrismJS : Code highlighter
+- Shiki: Syntax highlighter
 
 ## TODO
 
@@ -17,7 +18,7 @@ Web app to convert HEX to OKLCH colors and TailwindCSS templates.
 - [x] (Color Card) Add percentage value for luminosity instead of decimal
 - [x] (Color Card) Add alpha channel
 - [ ] (Color Card) Add checkered background to canvas
-- [ ] (Color Card) Add linear gradients representing each range input
+- [x] (Color Card) Add linear gradients representing each range input
 - [ ] (Color Card) Add hotkeys to input fields (luminosity (l), chroma (c), hue (h), alpha (a))
 - [ ] (Color Card) Add '+' / '-' to sides of input fields when selected
 - [x] (Styling) Install component library (new Daisy?) & style components
@@ -29,3 +30,4 @@ Web app to convert HEX to OKLCH colors and TailwindCSS templates.
 - Add more colour formats to convert to
 - Add i18N & L10N
 - Add import/export functionality
+- Add range of colors with X steps (similar to tailwind default from X-50 to X-900 color ranges)
