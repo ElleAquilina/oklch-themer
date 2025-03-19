@@ -12,6 +12,8 @@ import {
     useMode,
 } from 'culori/fn'
 
+import { Color as ColorType } from '@/types/color.tsx'
+
 const COLOR_SPACE_GAP = 0.0001
 
 export let roundChannel = round(2)
@@ -49,4 +51,35 @@ export function getNearestNamedColor(color: Color): string {
     const colors = Object.keys(colorsNamed)
     const nearestNamedColor = nearest(colors, differenceEuclidean())
     return nearestNamedColor(color, 1)[0]
+}
+
+export function getNextColorName(color: string, colors: ColorType[]): string {
+    const nameExists = (name: string) => colors.some((c) => c.name === name)
+    const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+    let newName = color
+
+    // Try base name
+    if (!nameExists(newName)) {
+        return newName
+    }
+
+    // Try step names ([name]-50, [name]-100, [name]-200, etc.)
+    for (const step of steps) {
+        newName = `${newName}-${step}`
+
+        if (!nameExists(newName)) {
+            return newName
+        }
+    }
+
+    // Increment up from 1000 by 100 until new name is found
+    for (let i = 1000; nameExists(newName); i += 100) {
+        newName = `${newName}-${i}`
+
+        if (!nameExists(newName)) {
+            return newName
+        }
+    }
+
+    return newName
 }
