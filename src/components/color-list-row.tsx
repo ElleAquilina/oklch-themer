@@ -74,13 +74,8 @@ export default function ColorListRow({ color }: { color: Color }) {
     }
 
     function handleRemove() {
-        // Remove color from color list using name
         setColors(colors.filter((c) => c.name !== color.name))
-
-        // Remove color from selected
-        if (color.name === selected?.name) {
-            setSelected(null)
-        }
+        setSelected(null)
     }
 
     return (
