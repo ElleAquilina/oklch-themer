@@ -1,5 +1,9 @@
 import ColorListRow from '@/components/color-list-row.tsx'
-import { getNearestNamedColor, getRandomOklchColor } from '@/helpers/colors.tsx'
+import {
+    getNearestNamedColor,
+    getNextColorName,
+    getRandomOklchColor,
+} from '@/helpers/colors.tsx'
 import { colorsAtom } from '@/stores/atoms.tsx'
 import { Color } from '@/types/color.tsx'
 import { AnimatePresence, Reorder } from 'framer-motion'
@@ -11,8 +15,7 @@ export default function ColorList() {
 
     function handleAddColor() {
         const oklch = getRandomOklchColor()
-        // TODO: BUG: New color could have same name as an existing color
-        const name = getNearestNamedColor(oklch)
+        const name = getNextColorName(getNearestNamedColor(oklch), colors)
 
         const newColor: Color = {
             name: name,
