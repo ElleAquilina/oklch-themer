@@ -61,7 +61,7 @@ export function getNextColorName(
     const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
     const baseName =
         colorName.split('-')[0] ? colorName.split('-')[0] : colorName
-    let newName = ''
+    let newName = baseName
 
     // Try base name
     if (!nameExists(baseName)) {
@@ -84,5 +84,5 @@ export function getNextColorName(
         }
     }
 
-    return newName
+    return baseName
 }
