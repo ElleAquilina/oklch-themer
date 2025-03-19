@@ -90,7 +90,7 @@ export default function ColorListRow({ color }: { color: Color }) {
             <div
                 className='badge badge-outline'
                 style={{
-                    backgroundColor: formatCss(clampChroma(color.oklch)),
+                    backgroundColor: formatCss(clampChroma(color.color)),
                 }}
             />
             <div>

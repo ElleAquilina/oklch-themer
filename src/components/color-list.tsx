@@ -16,7 +16,7 @@ export default function ColorList() {
 
         const newColor: Color = {
             name: name,
-            oklch: oklch,
+            color: oklch,
         }
 
         setColors([...colors, newColor])
