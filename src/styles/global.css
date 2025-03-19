@@ -28,4 +28,8 @@
     .input {
         font-family: 'jetbrains', sans-serif;
     }
+
+    svg {
+        stroke-width: 1.5px; /* Default stroke width */
+    }
 }

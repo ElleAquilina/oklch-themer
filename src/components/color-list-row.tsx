@@ -4,7 +4,7 @@ import { Color } from '@/types/color.tsx'
 import { clampChroma, formatCss } from 'culori/fn'
 import { motion, Reorder } from 'framer-motion'
 import { useAtom } from 'jotai'
-import { Images, Trash2 } from 'lucide-react'
+import { Check, Images, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
@@ -93,9 +93,12 @@ export default function ColorListRow({ color }: { color: Color }) {
                     backgroundColor: formatCss(clampChroma(color.color)),
                 }}
             />
-            <div>
-                <p onClick={handleEdit} className='inline'>
-                    {isEdit ?
+            <div
+                onDoubleClick={handleEdit}
+                className='flex flex-row items-center'
+            >
+                {isEdit ?
+                    <>
                         <motion.input
                             key='input'
                             id={color.name}
@@ -103,27 +106,33 @@ export default function ColorListRow({ color }: { color: Color }) {
                             value={name}
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}
-                            onBlur={handleDeselect}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.5 }}
                             className={`input input-sm ${error ? 'input-error' : ''}`}
                         />
-                    :   color.name}
-                </p>
+
+                        <button
+                            onClick={submit}
+                            className='btn btn-square btn-sm btn-ghost mx-1'
+                        >
+                            <Check />
+                        </button>
+                    </>
+                :   color.name}
             </div>
             <div
-                className={`flex-col space-x-3 opacity-0 transition-opacity duration-400 group-hover:opacity-100 ${isEdit || selected?.name === color.name ? 'opacity-100' : ''}`}
+                className={`m-0 flex-col space-x-2 opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selected?.name === color.name ? 'opacity-100 group-hover:opacity-100' : ''}`}
             >
                 <button
                     onClick={handleDuplicate}
-                    className='btn btn-circle btn-xs btn-ghost'
+                    className='btn btn-square btn-sm btn-ghost'
                 >
                     <Images />
                 </button>
                 <button
                     onClick={handleRemove}
-                    className='btn btn-circle btn-xs btn-ghost'
+                    className='btn btn-square btn-sm btn-ghost'
                 >
                     <Trash2 />
                 </button>
