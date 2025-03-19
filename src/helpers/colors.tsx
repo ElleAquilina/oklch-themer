@@ -53,20 +53,24 @@ export function getNearestNamedColor(color: Color): string {
     return nearestNamedColor(color, 1)[0]
 }
 
-export function getNextColorName(color: string, colors: ColorType[]): string {
+export function getNextColorName(
+    colorName: string,
+    colors: ColorType[],
+): string {
     const nameExists = (name: string) => colors.some((c) => c.name === name)
     const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
-    let newName = color
+    const baseName =
+        colorName.split('-')[0] ? colorName.split('-')[0] : colorName
+    let newName = ''
 
     // Try base name
-    if (!nameExists(newName)) {
+    if (!nameExists(baseName)) {
         return newName
     }
 
     // Try step names ([name]-50, [name]-100, [name]-200, etc.)
     for (const step of steps) {
-        newName = `${newName}-${step}`
-
+        newName = `${baseName}-${step}`
         if (!nameExists(newName)) {
             return newName
         }
@@ -74,8 +78,7 @@ export function getNextColorName(color: string, colors: ColorType[]): string {
 
     // Increment up from 1000 by 100 until new name is found
     for (let i = 1000; nameExists(newName); i += 100) {
-        newName = `${newName}-${i}`
-
+        newName = `${baseName}-${i}`
         if (!nameExists(newName)) {
             return newName
         }
