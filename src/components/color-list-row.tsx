@@ -1,3 +1,4 @@
+import { getNextColorName } from '@/helpers/colors.tsx'
 import { ColorNameSchema } from '@/schemas/color-name'
 import { colorAtom, colorsAtom } from '@/stores/atoms.tsx'
 import { Color } from '@/types/color.tsx'
@@ -60,13 +61,18 @@ export default function ColorListRow({ color }: { color: Color }) {
         }
     }
 
-    function handleDeselect() {
-        setIsEdit(false)
-        setName('')
-        setError('')
+    function handleDuplicate() {
+        const name = getNextColorName(color.name, colors)
+
+        setColors([
+            ...colors,
+            {
+                name: name,
+                color: color.color,
+            },
+        ])
     }
 
-    function handleDuplicate() {}
     function handleRemove() {
         // Remove color from color list using name
         setColors(colors.filter((c) => c.name !== color.name))
