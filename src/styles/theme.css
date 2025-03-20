@@ -8,7 +8,7 @@
     name: 'wireframe';
     default: true;
     --color-alpha-100: oklch(100% 0 199);
-    --color-alpha-200: oklch(70% 0 199);
+    --color-alpha-200: oklch(80% 0 199);
 }
 
 /* Light Themes */
@@ -16,13 +16,13 @@
 @plugin 'daisyui/theme' {
     name: 'lofi';
     --color-alpha-100: oklch(100% 0 199);
-    --color-alpha-200: oklch(70% 0 199);
+    --color-alpha-200: oklch(80% 0 199);
 }
 
 @plugin 'daisyui/theme' {
     name: 'pastel';
     --color-alpha-100: oklch(100% 0 199);
-    --color-alpha-200: oklch(70% 0 199);
+    --color-alpha-200: oklch(80% 0 199);
 }
 
 /* Dark Themes */
