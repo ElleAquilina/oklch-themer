@@ -1,0 +1,40 @@
+
+@plugin 'daisyui' {
+    themes: aqua, coffee;
+}
+/* Default Themes */
+
+@plugin 'daisyui/theme' {
+    name: 'wireframe';
+    default: true;
+    --color-alpha-100: oklch(100% 0 199);
+    --color-alpha-200: oklch(70% 0 199);
+}
+
+/* Light Themes */
+
+@plugin 'daisyui/theme' {
+    name: 'lofi';
+    --color-alpha-100: oklch(100% 0 199);
+    --color-alpha-200: oklch(70% 0 199);
+}
+
+@plugin 'daisyui/theme' {
+    name: 'pastel';
+    --color-alpha-100: oklch(100% 0 199);
+    --color-alpha-200: oklch(70% 0 199);
+}
+
+/* Dark Themes */
+@plugin 'daisyui/theme' {
+    name: 'business';
+    prefersdark: true;
+    --color-alpha-100: oklch(20% 0 199);
+    --color-alpha-200: oklch(40% 0 199);
+}
+
+@plugin 'daisyui/theme' {
+    name: 'dim';
+    --color-alpha-100: oklch(25% 0.025 264);
+    --color-alpha-200: oklch(40% 0.025 264)
+}

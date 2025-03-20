@@ -6,7 +6,7 @@ function ThemeController() {
         //JSON.parse(localStorage.getItem('theme')),
     )
 
-    const themes = ['lofi', 'dark', 'retro', 'aqua', 'coffee']
+    const themes = ['wireframe', 'lofi', 'pastel', 'business', 'dim']
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme')
@@ -39,15 +39,23 @@ function ThemeController() {
             </div>
             <ul
                 tabIndex={0}
-                className='dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl'
+                className='dropdown-content bg-base-300 rounded-box z-1 border-1 p-3 shadow-2xl'
             >
                 {themes.map((theme) => (
-                    <li key={theme}>
+                    <li className='flex w-full items-center gap-2' key={theme}>
+                        <div
+                            className={`badge badge-outline ${theme ? 'bg-base-100' : ''}`}
+                            data-theme={theme}
+                        />
+                        <div
+                            className={`badge badge-outline ${theme ? 'bg-primary' : ''}`}
+                            data-theme={theme}
+                        />
                         <input
                             type='radio'
                             name='theme-dropdown'
-                            className='theme-controller btn btn-sm btn-block btn-ghost w-full justify-start'
-                            aria-label={theme === 'lofi' ? 'light' : theme}
+                            className='theme-controller btn btn-sm btn-ghost checked:btn-active justify-start'
+                            aria-label={theme}
                             value={theme}
                             onChange={handleThemeChange}
                         />
