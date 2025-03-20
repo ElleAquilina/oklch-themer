@@ -17,6 +17,8 @@ export default function ColorListRow({ color }: { color: Color }) {
     const [name, setName] = useState('')
     const [error, setError] = useState('')
 
+    console.log('Current selected color:', selected)
+
     function handleEdit() {
         setIsEdit(true)
         setName(color.name)
@@ -73,9 +75,14 @@ export default function ColorListRow({ color }: { color: Color }) {
         ])
     }
 
+    function handleSelect() {
+        console.log('handle row select')
+        setSelected(color)
+    }
+
     function handleRemove() {
+        setSelected(undefined)
         setColors(colors.filter((c) => c.name !== color.name))
-        setSelected(null)
     }
 
     return (
@@ -85,7 +92,7 @@ export default function ColorListRow({ color }: { color: Color }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelected(color)}
+            onClick={handleSelect}
             className={`list-row group mb-1 items-center p-1 sm:p-2 ${selected?.name === color.name ? 'bg-base-100' : ''}`}
         >
             <div
@@ -126,13 +133,19 @@ export default function ColorListRow({ color }: { color: Color }) {
                 className={`m-0 flex-col space-x-2 opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selected?.name === color.name ? 'opacity-100 group-hover:opacity-100' : ''}`}
             >
                 <button
-                    onClick={handleDuplicate}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        handleDuplicate()
+                    }}
                     className='btn btn-square btn-sm btn-ghost'
                 >
                     <Images />
                 </button>
                 <button
-                    onClick={handleRemove}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        handleRemove()
+                    }}
                     className='btn btn-square btn-sm btn-ghost'
                 >
                     <Trash2 />

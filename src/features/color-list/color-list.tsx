@@ -1,4 +1,3 @@
-import ColorListRow from '@/components/color-list-row.tsx'
 import {
     getNearestNamedColor,
     getNextColorName,
@@ -9,6 +8,7 @@ import { Color } from '@/types/color.tsx'
 import { AnimatePresence, Reorder } from 'framer-motion'
 import { useAtom } from 'jotai'
 import { CircleFadingPlus } from 'lucide-react'
+import ColorListRow from './components/color-list-row.tsx'
 
 export default function ColorList() {
     const [colors, setColors] = useAtom(colorsAtom)
