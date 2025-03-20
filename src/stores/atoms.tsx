@@ -4,5 +4,5 @@ import { atom } from 'jotai'
 
 export const oklchAtom = atom<Oklch>()
 
-export const colorAtom = atom<Color | null>(null)
+export const colorAtom = atom<Color>()
 export const colorsAtom = atom<Color[]>([])
