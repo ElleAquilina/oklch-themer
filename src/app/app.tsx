@@ -1,7 +1,7 @@
-import ColorList from '@/components/color-list.tsx'
-import Footer from '@/components/footer.tsx'
-import Header from '@/components/header.tsx'
-import OklchDisplay from '@/components/oklch-display.tsx'
+import Footer from '@/components/footer'
+import Header from '@/components/header'
+import ColorList from '@/features/color-list/color-list'
+import OklchDisplay from '@/features/oklch-display/oklch-display'
 
 function App() {
     return (
