@@ -80,7 +80,6 @@ export default function ColorListRow({ color }: { color: Color }) {
     }
 
     function handleSelect() {
-        console.log('handle row select')
         setSelected(color)
     }
 
