@@ -1,6 +1,6 @@
-import { Color as CuloriColor } from 'culori/fn'
+import { Oklch } from 'culori/fn'
 
 export interface Color {
     name: string
-    color: CuloriColor
+    color: Oklch
 }

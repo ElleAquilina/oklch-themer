@@ -4,7 +4,7 @@ import {
     getRandomOklchColor,
 } from '@/helpers/colors.tsx'
 import { colorAtom, colorsAtom } from '@/stores/atoms.tsx'
-import { clampChroma, Color, formatCss } from 'culori/fn'
+import { clampChroma, formatCss, Oklch } from 'culori/fn'
 import { useAtom } from 'jotai'
 import { Dices } from 'lucide-react'
 
@@ -13,7 +13,7 @@ export default function Header() {
     const [colors, setColors] = useAtom(colorsAtom)
 
     function handleRandomize() {
-        const oklch: Color = getRandomOklchColor()
+        const oklch: Oklch = getRandomOklchColor()
         const name =
             color?.name ?
                 color?.name

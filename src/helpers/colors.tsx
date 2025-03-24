@@ -22,7 +22,7 @@ export let roundChannel = round(2)
 export let rgb = useMode(modeRgb)
 export let oklch = useMode(modeOklch)
 
-export function getRandomOklchColor(): Color {
+export function getRandomOklchColor(): Oklch {
     return roundOklch(clampChroma(random('oklch', { l: [0.4, 1], alpha: 1 })))
 }
 
@@ -41,7 +41,7 @@ export function inRgb(color: Color | undefined): boolean {
     return false
 }
 
-export function roundOklch(oklch: Oklch): Color {
+export function roundOklch(oklch: Oklch): Oklch {
     return {
         ...oklch,
         l: roundChannel(oklch.l),
