@@ -1,8 +1,7 @@
 import { getNextColorName } from '@/helpers/colors.tsx'
 import { ColorNameSchema } from '@/schemas/color-name'
-import { colorAtom, colorsAtom } from '@/stores/atoms.tsx'
-import { Color } from '@/types/color.tsx'
-import { clampChroma, formatCss } from 'culori/fn'
+import { colorAtom, colorsAtom, nameAtom } from '@/stores/atoms.tsx'
+import { clampChroma, formatCss, Oklch } from 'culori/fn'
 import { motion, Reorder } from 'framer-motion'
 import { useAtom } from 'jotai'
 import { Check, Images, Trash2 } from 'lucide-react'
@@ -10,20 +9,26 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
 
-export default function ColorListRow({ color }: { color: Color }) {
+interface ColorListRowProps {
+    color: Oklch
+    name: string
+}
+
+export default function ColorListRow({ color, name }: ColorListRowProps) {
     const [colors, setColors] = useAtom(colorsAtom)
     const [selected, setSelected] = useAtom(colorAtom)
+    const [selectedName, setSelectedName] = useAtom(nameAtom)
     const [isEdit, setIsEdit] = useState(false)
-    const [name, setName] = useState('')
+    const [inputName, setInputName] = useState('')
     const [error, setError] = useState('')
 
     function handleEdit() {
         setIsEdit(true)
-        setName(color.name)
+        setInputName(name)
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setName(e.target.value)
+        setInputName(e.target.value)
     }
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -34,29 +39,26 @@ export default function ColorListRow({ color }: { color: Color }) {
 
     function submit() {
         try {
-            if (name !== color.name) {
+            if (inputName !== name) {
                 // TODO: Edge Case; Disallow certain characters, etc.
-                let valid = ColorNameSchema(colors).parse(name)
+                let valid = ColorNameSchema(colors).parse(inputName)
 
                 if (valid) {
                     const newColors = colors.map((c) => {
-                        if (c.name === color.name) {
-                            return { ...c, name: name }
+                        if (c.name === name) {
+                            return { ...c, name: inputName }
                         } else {
                             return c
                         }
                     })
 
                     setColors(newColors)
-                    setSelected({
-                        ...color,
-                        name: name,
-                    })
+                    setSelectedName(inputName)
                 }
             }
 
             setIsEdit(false)
-            setName('')
+            setInputName('')
             setError('')
         } catch (e) {
             if (e instanceof z.ZodError) {
@@ -66,40 +68,41 @@ export default function ColorListRow({ color }: { color: Color }) {
     }
 
     function handleDuplicate() {
-        const name = getNextColorName(color.name, colors)
+        const newName = getNextColorName(name, colors)
 
         setColors([
             ...colors,
             {
-                name: name,
-                color: color.color,
+                name: newName,
+                color: color,
             },
         ])
     }
 
     function handleSelect() {
         setSelected(color)
+        setSelectedName(name)
     }
 
     function handleRemove() {
         setSelected(undefined)
-        setColors(colors.filter((c) => c.name !== color.name))
+        setColors(colors.filter((c) => c.name !== name))
     }
 
     return (
         <Reorder.Item
-            key={color.name}
+            key={name}
             value={color}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleSelect}
-            className={`list-row group mb-1 items-center p-1 md:p-2 ${selected?.name === color.name ? 'bg-base-100' : ''}`}
+            className={`list-row group mb-1 items-center p-1 md:p-2 ${selectedName === name ? 'bg-base-100' : ''}`}
         >
             <div
                 className='badge badge-outline'
                 style={{
-                    backgroundColor: formatCss(clampChroma(color.color)),
+                    backgroundColor: formatCss(clampChroma(color)),
                 }}
             />
             <div
@@ -110,9 +113,9 @@ export default function ColorListRow({ color }: { color: Color }) {
                     <>
                         <motion.input
                             key='input'
-                            id={color.name}
+                            id={name}
                             type='text'
-                            value={name}
+                            value={inputName}
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}
                             initial={{ opacity: 0 }}
@@ -131,10 +134,10 @@ export default function ColorListRow({ color }: { color: Color }) {
                             <Check />
                         </button>
                     </>
-                :   color.name}
+                :   name}
             </div>
             <div
-                className={`m-0 flex-col opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selected?.name === color.name ? 'opacity-100 group-hover:opacity-100' : ''}`}
+                className={`m-0 flex-col opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selectedName === name ? 'opacity-100 group-hover:opacity-100' : ''}`}
             >
                 <button
                     onClick={(e) => {

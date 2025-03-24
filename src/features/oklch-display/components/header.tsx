@@ -1,31 +1,21 @@
-import {
-    getNearestNamedColor,
-    getNextColorName,
-    getRandomOklchColor,
-} from '@/helpers/colors.tsx'
-import { colorAtom, colorsAtom } from '@/stores/atoms.tsx'
+import { getRandomOklchColor } from '@/helpers/colors.tsx'
+import { colorAtom, colorsAtom, nameAtom } from '@/stores/atoms.tsx'
 import { clampChroma, formatCss, Oklch } from 'culori/fn'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { Dices } from 'lucide-react'
 
 export default function Header() {
-    const [color, setColor] = useAtom(colorAtom)
     const [colors, setColors] = useAtom(colorsAtom)
+    const [color, setColor] = useAtom(colorAtom)
+    const name = useAtomValue(nameAtom)
 
     function handleRandomize() {
         const oklch: Oklch = getRandomOklchColor()
-        const name =
-            color?.name ?
-                color?.name
-            :   getNextColorName(getNearestNamedColor(oklch), colors)
-        const updatedColors = colors.map((color) => {
-            return color.name === name ? { name: name, color: oklch } : color
+        const updatedColors = colors.map((c) => {
+            return c.name === name ? { ...c, color: oklch } : c
         })
 
-        setColor({
-            name: name,
-            color: oklch,
-        })
+        setColor(oklch)
         setColors(updatedColors)
     }
 
@@ -41,12 +31,10 @@ export default function Header() {
                         <div
                             className='badge badge-outline'
                             style={{
-                                backgroundColor: formatCss(
-                                    clampChroma(color?.color),
-                                ),
+                                backgroundColor: formatCss(clampChroma(color)),
                             }}
                         />
-                        &nbsp;{color.name}
+                        &nbsp;{name}
                     </>
                 :   'OKLCH'}
             </h2>

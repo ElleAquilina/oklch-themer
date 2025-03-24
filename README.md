@@ -31,3 +31,11 @@ Web app to convert HEX to OKLCH colors and TailwindCSS templates.
 - Add i18N & L10N
 - Add import/export functionality
 - Add range of colors with X steps (similar to tailwind default from X-50 to X-900 color ranges)
+
+# Notes
+### Why are the individual color channels not in reusable components?
+When I first started this, I split up each cavas, range input, and text input into individual components that took in the channel name. When I did this, I quickly realised that if there was any deviation from an individual channel, it became pretty difficult to shoehorn in those specific details. 
+
+So when it came to it, I'd much prefer ease of simple, mind-numbing edits in all three channels, than added complexity trying to get the components to work together across the different channels.
+
+Example: The alpha channels' canvas has the checkered class behind it.

@@ -16,10 +16,7 @@ export default function Display() {
     function handleFallback() {
         // TODO: Fix fallback rounding issues
         if (color) {
-            setColor({
-                ...color,
-                color: clampChroma(color.color),
-            })
+            setColor(clampChroma(color))
         }
     }
 
@@ -27,18 +24,18 @@ export default function Display() {
         <>
             <div className='flex h-3/10 w-full flex-row gap-1 text-sm'>
                 {/* Color Displays */}
-                {color?.color && inRgb(color.color) ?
+                {color && inRgb(color) ?
                     <>
                         <motion.div
                             className='rounded-box border-neutral h-full w-full border-1 md:w-1/2'
-                            style={{ backgroundColor: formatCss(color.color) }}
+                            style={{ backgroundColor: formatCss(color) }}
                             initial={{
                                 width: 0,
-                                backgroundColor: formatCss(color.color),
+                                backgroundColor: formatCss(color),
                             }}
                             animate={{
                                 width: '100%',
-                                backgroundColor: formatCss(color.color),
+                                backgroundColor: formatCss(color),
                             }}
                             transition={{
                                 width: { duration: 0.5 },
@@ -50,7 +47,7 @@ export default function Display() {
                         <div className='rounded-box border-neutral flex h-full w-full justify-center border-2 border-dotted'>
                             <div>
                                 <button className='btn btn-disabled btn-xs m-2'>
-                                    {color?.color ?
+                                    {color ?
                                         'unavailable'
                                     :   'no color selected'}
                                 </button>
@@ -59,26 +56,20 @@ export default function Display() {
                     </>
                 }
                 {/* Additional Color Display: RGB Out of Range */}
-                {color?.color && !inRgb(color.color) ?
+                {color && !inRgb(color) ?
                     <>
                         <motion.div
                             className='rounded-box border-neutral flex h-full w-full justify-center border-1 md:w-1/2'
                             style={{
-                                backgroundColor: formatCss(
-                                    clampChroma(color.color),
-                                ),
+                                backgroundColor: formatCss(clampChroma(color)),
                             }}
                             initial={{
                                 width: 0,
-                                backgroundColor: formatCss(
-                                    clampChroma(color.color),
-                                ),
+                                backgroundColor: formatCss(clampChroma(color)),
                             }}
                             animate={{
                                 width: '100%',
-                                backgroundColor: formatCss(
-                                    clampChroma(color.color),
-                                ),
+                                backgroundColor: formatCss(clampChroma(color)),
                             }}
                             transition={{
                                 width: { duration: 0.5 },
@@ -100,11 +91,11 @@ export default function Display() {
 
             {/* Color Information */}
             <div className='flex flex-row items-center justify-center gap-2 pt-2'>
-                <p className='inline text-sm'>{formatCss(color?.color)}</p>
+                <p className='inline text-sm'>{formatCss(color)}</p>
                 <button
                     onClick={() => {
                         navigator.clipboard.writeText(
-                            color ? formatCss(color.color) : '',
+                            color ? formatCss(color) : '',
                         )
                     }}
                     className='btn btn-sm btn-square btn-ghost'
