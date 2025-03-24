@@ -13,14 +13,16 @@ import {
 } from 'culori/fn'
 
 import { Color as ColorType } from '@/types/color.tsx'
+import { modeOklch } from 'culori'
 
 const COLOR_SPACE_GAP = 0.0001
 
 export let roundChannel = round(2)
 
 export let rgb = useMode(modeRgb)
+export let oklch = useMode(modeOklch)
 
-export function getRandomOklchColor(): Oklch {
+export function getRandomOklchColor(): Color {
     return roundOklch(clampChroma(random('oklch', { l: [0.4, 1], alpha: 1 })))
 }
 
@@ -39,7 +41,7 @@ export function inRgb(color: Color | undefined): boolean {
     return false
 }
 
-export function roundOklch(oklch: Oklch): Oklch {
+export function roundOklch(oklch: Oklch): Color {
     return {
         ...oklch,
         l: roundChannel(oklch.l),

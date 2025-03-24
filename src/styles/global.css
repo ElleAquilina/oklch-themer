@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @import './theme.css';
 
+@theme {
+    --font-jetbrains: 'jetbrains', ui-sans-serif, system-ui, sans-serif;
+}
+
 @font-face {
     font-family: 'roboto';
     font-display: swap;
@@ -13,13 +17,20 @@
     src: url('../assets/fonts/JetBrainsMono.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'barlow';
+    font-display: swap;
+    src: url('../assets/fonts/Barlow-Regular.ttf') format('truetype');
+}
+
 @layer base {
     body {
-        font-family: 'Roboto', sans-serif; /* Default font */
+        font-family: 'jetbrains', sans-serif; /* Default font */
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'jetbrains', sans-serif;
+        font-family: 'barlow', sans-serif;
+        font-weight: bold;
     }
 
     .input {

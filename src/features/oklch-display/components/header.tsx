@@ -50,9 +50,10 @@ export default function Header() {
                     </>
                 :   'OKLCH'}
             </h2>
+
             <button
                 onClick={handleRandomize}
-                className='btn btn-square btn-ghost -mb-1'
+                className={`btn btn-square btn-ghost ${!color ? 'btn-disabled' : ''} -mb-1`}
             >
                 <Dices />
             </button>
