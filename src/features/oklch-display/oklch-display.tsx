@@ -1,3 +1,4 @@
+import Channel from './components/channel'
 import Display from './components/display'
 import Header from './components/header'
 
@@ -11,7 +12,9 @@ export default function OklchDisplay() {
             <div className='divider divider-vertical mt-1 text-sm'>
                 channels
             </div>
-            <div className='h-full w-full'>Inputs</div>
+            <div className='h-full w-full'>
+                <Channel />
+            </div>
         </div>
     )
 }
