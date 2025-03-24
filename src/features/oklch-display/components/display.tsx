@@ -1,4 +1,4 @@
-import { inRgb, oklch, roundOklch } from '@/helpers/colors.tsx'
+import { inRgb } from '@/helpers/colors.tsx'
 import { colorAtom } from '@/stores/atoms.tsx'
 import { formatCss } from 'culori'
 import { clampChroma } from 'culori/fn'
@@ -14,11 +14,11 @@ export default function Display() {
      * works with RGB displays
      */
     function handleFallback() {
-        // TODO: Sometimes fallback does not fall into RGB range with rounding
+        // TODO: Fix fallback rounding issues
         if (color) {
             setColor({
                 ...color,
-                color: roundOklch(oklch(clampChroma(color.color))),
+                color: clampChroma(color.color),
             })
         }
     }
@@ -51,7 +51,7 @@ export default function Display() {
                             <div>
                                 <button className='btn btn-disabled btn-xs m-2'>
                                     {color?.color ?
-                                        'non-displayable'
+                                        'unavailable'
                                     :   'no color selected'}
                                 </button>
                             </div>
