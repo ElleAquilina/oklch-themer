@@ -1,9 +1,33 @@
-import { colorAtom } from '@/stores/atoms.tsx'
-import { clampChroma, formatCss } from 'culori/fn'
-import { useAtomValue } from 'jotai'
+import {
+    getNearestNamedColor,
+    getNextColorName,
+    getRandomOklchColor,
+} from '@/helpers/colors.tsx'
+import { colorAtom, colorsAtom } from '@/stores/atoms.tsx'
+import { clampChroma, Color, formatCss } from 'culori/fn'
+import { useAtom } from 'jotai'
+import { Dices } from 'lucide-react'
 
 export default function Header() {
-    const color = useAtomValue(colorAtom)
+    const [color, setColor] = useAtom(colorAtom)
+    const [colors, setColors] = useAtom(colorsAtom)
+
+    function handleRandomize() {
+        const oklch: Color = getRandomOklchColor()
+        const name =
+            color?.name ?
+                color?.name
+            :   getNextColorName(getNearestNamedColor(oklch), colors)
+        const updatedColors = colors.map((color) => {
+            return color.name === name ? { name: name, color: oklch } : color
+        })
+
+        setColor({
+            name: name,
+            color: oklch,
+        })
+        setColors(updatedColors)
+    }
 
     // TODO: Add double click edit of name
 
@@ -25,6 +49,12 @@ export default function Header() {
                     </>
                 :   'OKLCH'}
             </h2>
+            <button
+                onClick={handleRandomize}
+                className='btn btn-square btn-ghost btn-lg'
+            >
+                <Dices />
+            </button>
         </div>
     )
 }
