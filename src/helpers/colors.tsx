@@ -24,16 +24,19 @@ export function getRandomOklchColor(): Oklch {
     return roundOklch(clampChroma(random('oklch', { l: [0.4, 1], alpha: 1 })))
 }
 
-export function inRgb(color: Color): boolean {
+export function inRgb(color: Color | undefined): boolean {
     let check = rgb(color)
-    return (
-        check.r >= -COLOR_SPACE_GAP &&
-        check.r <= 1 + COLOR_SPACE_GAP &&
-        check.g >= -COLOR_SPACE_GAP &&
-        check.g <= 1 + COLOR_SPACE_GAP &&
-        check.b >= -COLOR_SPACE_GAP &&
-        check.b <= 1 + COLOR_SPACE_GAP
-    )
+    if (check) {
+        return (
+            check.r >= -COLOR_SPACE_GAP &&
+            check.r <= 1 + COLOR_SPACE_GAP &&
+            check.g >= -COLOR_SPACE_GAP &&
+            check.g <= 1 + COLOR_SPACE_GAP &&
+            check.b >= -COLOR_SPACE_GAP &&
+            check.b <= 1 + COLOR_SPACE_GAP
+        )
+    }
+    return false
 }
 
 export function roundOklch(oklch: Oklch): Oklch {

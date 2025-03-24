@@ -32,11 +32,12 @@ export default function Header() {
     // TODO: Add double click edit of name
 
     return (
-        <div className='sticky top-0 flex flex-row items-center justify-between p-3'>
+        <div className='sticky top-0 flex flex-row items-center justify-between p-2'>
             <h2 className='text-xl md:text-2xl'>
                 &gt;&nbsp;
                 {color ?
                     <>
+                        &nbsp;
                         <div
                             className='badge badge-outline'
                             style={{
@@ -51,7 +52,7 @@ export default function Header() {
             </h2>
             <button
                 onClick={handleRandomize}
-                className='btn btn-square btn-ghost btn-lg'
+                className='btn btn-square btn-ghost -mb-1'
             >
                 <Dices />
             </button>
