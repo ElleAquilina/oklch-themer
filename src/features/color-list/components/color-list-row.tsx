@@ -17,8 +17,6 @@ export default function ColorListRow({ color }: { color: Color }) {
     const [name, setName] = useState('')
     const [error, setError] = useState('')
 
-    console.log('Current selected color:', selected)
-
     function handleEdit() {
         setIsEdit(true)
         setName(color.name)
