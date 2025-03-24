@@ -94,7 +94,7 @@ export default function ColorListRow({ color }: { color: Color }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleSelect}
-            className={`list-row group mb-1 items-center p-1 sm:p-2 ${selected?.name === color.name ? 'bg-base-100' : ''}`}
+            className={`list-row group mb-1 items-center p-1 md:p-2 ${selected?.name === color.name ? 'bg-base-100' : ''}`}
         >
             <div
                 className='badge badge-outline'
@@ -134,7 +134,7 @@ export default function ColorListRow({ color }: { color: Color }) {
                 :   color.name}
             </div>
             <div
-                className={`m-0 flex-col space-x-2 opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selected?.name === color.name ? 'opacity-100 group-hover:opacity-100' : ''}`}
+                className={`m-0 flex-col opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selected?.name === color.name ? 'opacity-100 group-hover:opacity-100' : ''}`}
             >
                 <button
                     onClick={(e) => {
