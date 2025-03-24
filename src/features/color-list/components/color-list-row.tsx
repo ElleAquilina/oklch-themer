@@ -50,6 +50,10 @@ export default function ColorListRow({ color }: { color: Color }) {
                     })
 
                     setColors(newColors)
+                    setSelected({
+                        ...color,
+                        name: name,
+                    })
                 }
             }
 
@@ -121,7 +125,10 @@ export default function ColorListRow({ color }: { color: Color }) {
                         />
 
                         <button
-                            onClick={submit}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                submit()
+                            }}
                             className='btn btn-square btn-sm btn-ghost mx-1'
                         >
                             <Check />
