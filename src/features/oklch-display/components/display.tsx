@@ -99,12 +99,17 @@ export default function Display() {
                                 }}
                             >
                                 <div>
-                                    <button
+                                    <motion.button
                                         onClick={handleFallback}
+                                        key='modal-close'
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 100 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 2 }}
                                         className={`btn btn-xs m-2`}
                                     >
                                         fallback
-                                    </button>
+                                    </motion.button>
                                 </div>
                             </motion.div>
                         </>
@@ -114,17 +119,21 @@ export default function Display() {
 
             {/* Color Information */}
             <div className='flex flex-row items-center justify-center gap-2 pt-2'>
-                <p className='inline text-sm'>{formatCss(color)}</p>
-                <button
-                    onClick={() => {
-                        navigator.clipboard.writeText(
-                            color ? formatCss(color) : '',
-                        )
-                    }}
-                    className='btn btn-sm btn-square btn-ghost'
-                >
-                    <Copy />
-                </button>
+                {(isValid || isUnavailable) && (
+                    <>
+                        <p className='inline text-sm'>{formatCss(color)}</p>
+                        <button
+                            onClick={() => {
+                                navigator.clipboard.writeText(
+                                    color ? formatCss(color) : '',
+                                )
+                            }}
+                            className='btn btn-sm btn-square btn-ghost'
+                        >
+                            <Copy />
+                        </button>
+                    </>
+                )}
             </div>
         </>
     )
