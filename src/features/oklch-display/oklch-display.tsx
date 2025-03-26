@@ -1,4 +1,4 @@
-import Channel from './components/channel'
+import ChannelList from '@/features/oklch-display/components/channel-list.tsx'
 import Display from './components/display'
 import Header from './components/header'
 
@@ -13,7 +13,7 @@ export default function OklchDisplay() {
                 channels
             </div>
             <div className='h-full w-full'>
-                <Channel />
+                <ChannelList />
             </div>
         </div>
     )
