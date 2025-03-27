@@ -1,4 +1,4 @@
-import Hue from '@/features/oklch-display/components/hue/hue'
+import Hue from '@/features/hue/hue'
 import Display from './components/display'
 import Header from './components/header'
 
