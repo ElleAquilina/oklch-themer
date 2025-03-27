@@ -1,5 +1,5 @@
 import { useKeyPress } from '@/hooks/useKeyPress.tsx'
-import { HueSchema } from '@/schemas/oklch.tsx'
+import { OklchSchema } from '@/schemas/oklch.tsx'
 import { colorAtom, colorsAtom, nameAtom } from '@/stores/atoms.tsx'
 import { Oklch } from 'culori/fn'
 import { useAtom, useAtomValue } from 'jotai/index'
@@ -7,7 +7,11 @@ import { useEffect, useRef, useState } from 'react'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
 
-export default function TextInput() {
+interface ChannelTextInputProps {
+    channel: 'l' | 'c' | 'h' | 'alpha'
+}
+
+export default function TextInput({ channel }: ChannelTextInputProps) {
     const [colors, setColors] = useAtom(colorsAtom)
     const [color, setColor] = useAtom(colorAtom)
     const name = useAtomValue(nameAtom)
@@ -16,20 +20,20 @@ export default function TextInput() {
 
     const inputRef = useRef<HTMLInputElement>(null)
 
-    useKeyPress(() => inputRef.current?.focus(), ['h'])
+    useKeyPress(() => inputRef.current?.focus(), [channel])
 
     useEffect(() => {
-        if (color && color.h) {
-            setInputValue(color.h.toString())
+        if (color && color[channel]) {
+            setInputValue(color[channel].toString())
         }
-    }, [color?.h])
+    }, [color?.[channel]])
 
     function submit() {
         try {
-            let valid = HueSchema.parse(inputValue)
+            let valid = OklchSchema[channel].parse(inputValue)
 
             if (valid && color) {
-                const oklch: Oklch = { ...color, h: valid }
+                const oklch: Oklch = { ...color, [channel]: valid }
                 const updatedColors = colors.map((c) => {
                     return c.name === name ? { ...c, color: oklch } : c
                 })
@@ -56,7 +60,7 @@ export default function TextInput() {
                     )}
                     <input
                         type='text'
-                        name='h'
+                        name={channel}
                         ref={inputRef}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}

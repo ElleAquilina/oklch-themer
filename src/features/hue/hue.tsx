@@ -1,8 +1,8 @@
+import ChannelRangeInput from '@/components/channel-range-input'
+import ChannelTextInput from '@/components/channel-text-input'
 import { colorAtom } from '@/stores/atoms.tsx'
 import { useAtomValue } from 'jotai/index'
 import Canvas from './components/canvas'
-import RangeInput from './components/range-input'
-import TextInput from './components/text-input'
 
 export default function Hue() {
     const color = useAtomValue(colorAtom)
@@ -16,11 +16,16 @@ export default function Hue() {
                             <kbd className='kbd'>H</kbd>
                             <p>Hue</p>
                         </div>
-                        <TextInput />
+                        <ChannelTextInput channel='h' />
                     </div>
                     <div className='relative flex w-full flex-col items-center justify-center'>
                         <Canvas />
-                        <RangeInput />
+                        <ChannelRangeInput
+                            channel='h'
+                            min={0}
+                            max={360}
+                            step={0.1}
+                        />
                     </div>
                 </div>
             )}
