@@ -88,7 +88,7 @@ export default function ChannelList() {
                         <canvas
                             ref={canvasRef}
                             width={360}
-                            className='rounded-box border-neutral h-10 w-full border-1 border-solid'
+                            className='bg-base-100 rounded-box border-neutral h-10 w-full border-1 border-solid'
                         />
                         <input
                             type='range'

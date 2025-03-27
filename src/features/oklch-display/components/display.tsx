@@ -105,7 +105,7 @@ export default function Display() {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 100 }}
                                         exit={{ opacity: 0 }}
-                                        transition={{ duration: 2 }}
+                                        transition={{ duration: 1 }}
                                         className={`btn btn-xs m-2`}
                                     >
                                         fallback
