@@ -3,7 +3,7 @@ import { ColorNameSchema } from '@/schemas/color-name'
 import { colorAtom, colorsAtom, nameAtom } from '@/stores/atoms.tsx'
 import { clampChroma, formatCss, Oklch } from 'culori/fn'
 import { motion, Reorder } from 'framer-motion'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { Check, Images, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { z } from 'zod'
@@ -16,7 +16,7 @@ interface ColorListRowProps {
 
 export default function ColorListRow({ color, name }: ColorListRowProps) {
     const [colors, setColors] = useAtom(colorsAtom)
-    const [selected, setSelected] = useAtom(colorAtom)
+    const setSelected = useSetAtom(colorAtom)
     const [selectedName, setSelectedName] = useAtom(nameAtom)
     const [isEdit, setIsEdit] = useState(false)
     const [inputName, setInputName] = useState('')
@@ -53,6 +53,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
                     })
 
                     setColors(newColors)
+                    setSelected(color)
                     setSelectedName(inputName)
                 }
             }
@@ -137,7 +138,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
                 :   name}
             </div>
             <div
-                className={`m-0 flex-col opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selectedName === name ? 'opacity-100 group-hover:opacity-100' : ''}`}
+                className={`m-0 flex-col opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selectedName === name && 'opacity-100 group-hover:opacity-100'}`}
             >
                 <button
                     onClick={(e) => {
