@@ -1,6 +1,6 @@
-import Footer from '@/components/footer'
-import Header from '@/components/header'
 import ColorList from '@/features/color-list/color-list'
+import Footer from '@/features/footer/footer'
+import Header from '@/features/header/header'
 import OklchDisplay from '@/features/oklch-display/oklch-display'
 
 function App() {

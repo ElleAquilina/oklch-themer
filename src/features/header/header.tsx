@@ -1,9 +1,9 @@
-import ThemeController from '@/components/theme-controller.tsx'
+import ThemeController from './components/theme-controller'
 
 export default function Header() {
     return (
         <>
-            <header className='flex w-full flex-row items-center justify-between p-2'>
+            <header className='flex w-full flex-row items-center justify-between p-2 pt-5'>
                 <div />
                 <div>
                     <h1 className='text-2xl md:text-4xl'>
