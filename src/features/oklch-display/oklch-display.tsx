@@ -1,3 +1,4 @@
+import Chroma from '@/features/chroma/chroma'
 import Hue from '@/features/hue/hue'
 import Luminosity from '@/features/luminosity/luminosity'
 import Display from './components/display'
@@ -16,6 +17,7 @@ export default function OklchDisplay() {
             <div className='flex h-full w-full flex-col gap-5'>
                 <Hue />
                 <Luminosity />
+                <Chroma />
             </div>
         </div>
     )
