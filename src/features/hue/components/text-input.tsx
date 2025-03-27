@@ -65,7 +65,7 @@ export default function TextInput() {
                             e.key === 'Enter' ? submit() : undefined
                         }
                         onFocus={(e) => e.target.select()}
-                        className={`input w-18 text-center ${error && 'input-error'}`}
+                        className={`input w-18 p-0 text-center ${error && 'input-error'}`}
                     />
                 </div>
             )}
