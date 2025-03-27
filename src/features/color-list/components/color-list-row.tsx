@@ -1,7 +1,8 @@
 import { getNextColorName } from '@/helpers/colors.tsx'
 import { ColorNameSchema } from '@/schemas/color-name'
 import { colorAtom, colorsAtom, nameAtom } from '@/stores/atoms.tsx'
-import { clampChroma, formatCss, Oklch } from 'culori/fn'
+import { Color } from '@/types/color.tsx'
+import { clampChroma, formatCss } from 'culori/fn'
 import { motion, Reorder } from 'framer-motion'
 import { useAtom, useSetAtom } from 'jotai'
 import { Check, Images, Trash2 } from 'lucide-react'
@@ -9,12 +10,7 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { fromError } from 'zod-validation-error'
 
-interface ColorListRowProps {
-    color: Oklch
-    name: string
-}
-
-export default function ColorListRow({ color, name }: ColorListRowProps) {
+export default function ColorListRow({ color }: { color: Color}) {
     const [colors, setColors] = useAtom(colorsAtom)
     const setSelected = useSetAtom(colorAtom)
     const [selectedName, setSelectedName] = useAtom(nameAtom)
@@ -24,7 +20,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
 
     function handleEdit() {
         setIsEdit(true)
-        setInputName(name)
+        setInputName(color.name)
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -39,13 +35,13 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
 
     function submit() {
         try {
-            if (inputName !== name) {
+            if (inputName !== color.name) {
                 // TODO: Edge Case; Disallow certain characters, etc.
                 let valid = ColorNameSchema(colors).parse(inputName)
 
                 if (valid) {
                     const newColors = colors.map((c) => {
-                        if (c.name === name) {
+                        if (c.name === color.name) {
                             return { ...c, name: inputName }
                         } else {
                             return c
@@ -53,7 +49,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
                     })
 
                     setColors(newColors)
-                    setSelected(color)
+                    setSelected(color.color)
                     setSelectedName(inputName)
                 }
             }
@@ -69,30 +65,30 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
     }
 
     function handleDuplicate() {
-        const newName = getNextColorName(name, colors)
+        const newName = getNextColorName(color.name, colors)
 
         setColors([
             ...colors,
             {
                 name: newName,
-                color: color,
+                color: color.color,
             },
         ])
     }
 
     function handleSelect() {
-        setSelected(color)
-        setSelectedName(name)
+        setSelected(color.color)
+        setSelectedName(color.name)
     }
 
     function handleRemove() {
         setSelected(undefined)
-        setColors(colors.filter((c) => c.name !== name))
+        setColors(colors.filter((c) => c.name !== color.name))
     }
 
     return (
         <Reorder.Item
-            key={name}
+            key={color.name}
             value={color}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -103,7 +99,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
             <div
                 className='badge badge-outline'
                 style={{
-                    backgroundColor: formatCss(clampChroma(color)),
+                    backgroundColor: formatCss(clampChroma(color.color)),
                 }}
             />
             <div
@@ -114,7 +110,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
                     <>
                         <motion.input
                             key='input'
-                            id={name}
+                            id={color.name}
                             type='text'
                             value={inputName}
                             onChange={handleChange}
@@ -135,7 +131,7 @@ export default function ColorListRow({ color, name }: ColorListRowProps) {
                             <Check />
                         </button>
                     </>
-                :   name}
+                :   color.name}
             </div>
             <div
                 className={`m-0 flex-col opacity-0 transition-opacity duration-400 ${!isEdit ? 'group-hover:opacity-100' : 'hidden'} ${!isEdit && selectedName === name && 'opacity-100 group-hover:opacity-100'}`}

@@ -45,8 +45,7 @@ export default function ColorList() {
                 <AnimatePresence>
                     {colors.map((color) => (
                         <ColorListRow
-                            color={color.color}
-                            name={color.name}
+                            color={color}
                             key={color.name}
                         />
                     ))}
