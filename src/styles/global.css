@@ -50,4 +50,33 @@
         margin: 0px;
         padding:0px;
     }
+
+    .range-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .range-input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 50px;
+        background-color: var(--color-thumb);
+        border-radius: var(--radius-box);
+        border-color: var(--color-base-content);
+        border-width: 2px;
+        border-style: solid;
+        cursor: pointer;
+    }
+
+    .range-input::-moz-range-thumb {
+        width: 15px;
+        height: 50px;
+        border-radius: var(--radius-box);
+        border-color: var(--color-base-content);
+        border-width: 2px;
+        border-style: solid;
+        cursor: pointer;
+    }
 }
