@@ -1,4 +1,5 @@
 import Hue from '@/features/hue/hue'
+import Luminosity from '@/features/luminosity/luminosity'
 import Display from './components/display'
 import Header from './components/header'
 
@@ -12,8 +13,9 @@ export default function OklchDisplay() {
             <div className='divider divider-vertical mt-1 text-sm'>
                 channels
             </div>
-            <div className='h-full w-full'>
+            <div className='flex h-full w-full flex-col gap-5'>
                 <Hue />
+                <Luminosity />
             </div>
         </div>
     )
