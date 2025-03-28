@@ -3,6 +3,7 @@ import Hue from '@/features/hue/hue'
 import Luminosity from '@/features/luminosity/luminosity'
 import Display from './components/display'
 import Header from './components/header'
+import Alpha from '@/features/alpha/alpha.tsx'
 
 export default function OklchDisplay() {
     // TODO: Make color name a component that types out the color name
@@ -18,6 +19,7 @@ export default function OklchDisplay() {
                 <Hue />
                 <Luminosity />
                 <Chroma />
+                <Alpha />
             </div>
         </div>
     )
