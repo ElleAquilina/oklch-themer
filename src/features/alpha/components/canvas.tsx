@@ -1,4 +1,3 @@
-import { inRgb } from '@/helpers/colors.tsx'
 import { colorAtom } from '@/stores/atoms.tsx'
 import { clampChroma, formatCss, Oklch } from 'culori/fn'
 import { useAtomValue } from 'jotai/index'
@@ -38,13 +37,8 @@ export default function Canvas() {
                 alpha: i/1000,
             }
 
-            // If color is not in RGB range, show as blank
-            if (inRgb(gradientColor)) {
-                ctx.fillStyle = formatCss(clampChroma(gradientColor))
-            } else {
-                ctx.fillStyle = 'rgba(0,0,0,0)'
-            }
-
+            // Always show color regardless of RGB status
+            ctx.fillStyle = formatCss(clampChroma(gradientColor))
             ctx.fillRect(i * colorWidth, 0, colorWidth, canvas.height)
         }
     }
