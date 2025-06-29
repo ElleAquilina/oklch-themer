@@ -9,8 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest",
-    "deploy": "gh-pages -d dist"
+    "test": "vitest"
   },
   "dependencies": {
     "culori": "^4.0.1",
